@@ -2,3 +2,5 @@
 restic_version: 0.9.6
 restic_download_path: /tmp
 restic_install_path: /usr/local/bin
+restic_dependencies:
+  - bzip2

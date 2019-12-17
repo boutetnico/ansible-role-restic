@@ -5,6 +5,11 @@
     force: true
     url: "https://github.com/restic/restic/releases/download/v{{ restic_version }}/restic_{{ restic_version }}_linux_amd64.bz2"
 
+- name: Ensure dependencies are installed
+  apt:
+    name: "{{ restic_dependencies }}"
+    state: present
+
 - name: Decompress the binary
   shell: "bunzip2 -c {{ restic_download_path }}/restic.bz2 > {{ restic_install_path }}/restic"
   args:

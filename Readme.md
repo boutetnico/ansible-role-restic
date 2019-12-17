@@ -26,6 +26,7 @@ Role Variables
 | restic_version               | yes      | `0.9.6`                         | string    |                                               |
 | restic_download_path         | yes      | `/tmp`                          | string    |                                               |
 | restic_install_path          | yes      | `/usr/local/bin/`               | string    |                                               |
+| restic_dependencies          | yes      | `[bzip2]`                       | list    |                                               |
 
 Dependencies
 ------------
