@@ -1,0 +1,18 @@
+---
+- name: Download Restic
+  get_url:
+    dest: "{{ restic_download_path }}/restic.bz2"
+    force: true
+    url: "https://github.com/restic/restic/releases/download/v{{ restic_version }}/restic_{{ restic_version }}_linux_amd64.bz2"
+
+- name: Decompress the binary
+  shell: "bunzip2 -c {{ restic_download_path }}/restic.bz2 > {{ restic_install_path }}/restic"
+  args:
+    creates: "{{ restic_install_path }}/restic"
+
+- name: Ensure permissions are correct
+  file:
+    group: "staff"
+    mode: "0755"
+    owner: "root"
+    path: "{{ restic_install_path }}/restic"
