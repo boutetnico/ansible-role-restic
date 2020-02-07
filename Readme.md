@@ -24,7 +24,8 @@ Role Variables
 | restic_version               | yes      | `0.9.6`                         | string    |                                               |
 | restic_download_path         | yes      | `/tmp`                          | string    |                                               |
 | restic_install_path          | yes      | `/usr/local/bin/`               | string    |                                               |
-| restic_dependencies          | yes      | `[bzip2]`                       | list    |                                               |
+| restic_dependencies          | yes      | `[bzip2]`                       | list      |                                               |
+| restic_password_files        | yes      | `[]`                            | list      |                                               |
 
 Dependencies
 ------------
@@ -37,6 +38,9 @@ Example Playbook
     - hosts: all
       roles:
         - ansible-role-restic
+          restic_password_files:
+            - path: /etc/restic/repo-password
+              password: secret
 
 Testing
 -------

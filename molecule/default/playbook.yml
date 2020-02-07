@@ -3,3 +3,6 @@
   hosts: all
   roles:
     - role: ansible-role-restic
+      restic_password_files:
+        - path: /etc/restic/repo-password
+          password: secret
