@@ -9,6 +9,7 @@
   apt:
     name: "{{ restic_dependencies }}"
     state: present
+    update_cache: true
 
 - name: Decompress the binary
   shell: bunzip2 -c {{ restic_download_path }}/restic.bz2 > {{ restic_install_path }}/restic
