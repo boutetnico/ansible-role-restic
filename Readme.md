@@ -1,12 +1,15 @@
+[![tests](https://github.com/boutetnico/ansible-role-restic/workflows/Test%20ansible%20role/badge.svg)](https://github.com/boutetnico/ansible-role-restic/actions?query=workflow%3A%22Test+ansible+role%22)
+[![Ansible Galaxy](https://img.shields.io/badge/galaxy-boutetnico.restic-blue.svg)](https://galaxy.ansible.com/boutetnico/restic)
+
 ansible-role-restic
 ===================
 
-This role installs Restic.
+This role installs [Restic](https://restic.net/).
 
 Requirements
 ------------
 
-Ansible 2.6 or newer.
+Ansible 2.7 or newer.
 
 Supported Platforms
 -------------------
