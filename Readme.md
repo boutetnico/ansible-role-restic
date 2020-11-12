@@ -19,13 +19,13 @@ Supported Platforms
 Role Variables
 --------------
 
-| Variable                     | Required | Default                         | Choices   | Comments                                      |
-|------------------------------|----------|---------------------------------|-----------|-----------------------------------------------|
-| restic_version               | yes      | `0.10.0`                        | string    |                                               |
-| restic_download_path         | yes      | `/tmp`                          | string    |                                               |
-| restic_install_path          | yes      | `/usr/local/bin/`               | string    |                                               |
-| restic_dependencies          | yes      | `[bzip2]`                       | list      |                                               |
-| restic_password_files        | yes      | `[]`                            | list      |                                               |
+| Variable                     | Required | Default               | Choices   | Comments                             |
+|------------------------------|----------|-----------------------|-----------|--------------------------------------|
+| restic_version               | yes      | `0.11.0`              | string    |                                      |
+| restic_download_path         | yes      | `/tmp`                | string    |                                      |
+| restic_install_path          | yes      | `/usr/local/bin/`     | string    |                                      |
+| restic_dependencies          | yes      | `[bzip2]`             | list      |                                      |
+| restic_password_files        | yes      | `[]`                  | list      |                                      |
 
 Dependencies
 ------------
