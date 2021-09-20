@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   role_name: restic
+  namespace: boutetnico
   author: Nicolas Boutet
   description: Install Restic.
   license: MIT
