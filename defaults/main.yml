@@ -1,5 +1,5 @@
 ---
-restic_version: 0.13.1
+restic_version: 0.14.0
 restic_download_path: /tmp
 restic_install_path: /usr/local/bin
 restic_dependencies:
