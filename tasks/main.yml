@@ -1,30 +1,30 @@
 ---
 - name: Download Restic
-  get_url:
+  ansible.builtin.get_url:
     dest: "{{ restic_download_path }}/restic.bz2"
     force: true
     url: https://github.com/restic/restic/releases/download/v{{ restic_version }}/restic_{{ restic_version }}_linux_amd64.bz2
 
 - name: Ensure dependencies are installed
-  apt:
+  ansible.builtin.apt:
     name: "{{ restic_dependencies }}"
     state: present
     update_cache: true
 
 - name: Decompress the binary
-  shell: bunzip2 -c {{ restic_download_path }}/restic.bz2 > {{ restic_install_path }}/restic
+  ansible.builtin.shell: bunzip2 -c {{ restic_download_path }}/restic.bz2 > {{ restic_install_path }}/restic
   args:
     creates: "{{ restic_install_path }}/restic"
 
 - name: Ensure permissions are correct
-  file:
+  ansible.builtin.file:
     group: staff
     mode: 0755
     owner: root
     path: "{{ restic_install_path }}/restic"
 
 - name: Ensure Restic password files path exist
-  file:
+  ansible.builtin.file:
     dest: "{{ item.path | dirname }}"
     group: "{{ item.group | d('root') }}"
     mode: 0750
@@ -33,7 +33,7 @@
   loop: "{{ restic_password_files }}"
 
 - name: Ensure Restic password files exist
-  copy:
+  ansible.builtin.copy:
     content: "{{ item.password }}"
     dest: "{{ item.path }}"
     mode: 0400
