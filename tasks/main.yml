@@ -3,6 +3,7 @@
   ansible.builtin.get_url:
     dest: "{{ restic_download_path }}/restic.bz2"
     force: true
+    mode: 0644
     url: https://github.com/restic/restic/releases/download/v{{ restic_version }}/restic_{{ restic_version }}_linux_amd64.bz2
 
 - name: Ensure dependencies are installed
