@@ -24,7 +24,7 @@ Role Variables
 
 | Variable                     | Required | Default               | Choices   | Comments                             |
 |------------------------------|----------|-----------------------|-----------|--------------------------------------|
-| restic_version               | yes      | `0.14.0`              | string    |                                      |
+| restic_version               | yes      | `0.15.0`              | string    |                                      |
 | restic_download_path         | yes      | `/tmp`                | string    |                                      |
 | restic_install_path          | yes      | `/usr/local/bin/`     | string    |                                      |
 | restic_dependencies          | yes      | `[bzip2]`             | list      |                                      |
