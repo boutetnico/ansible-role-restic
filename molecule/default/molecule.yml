@@ -11,10 +11,10 @@ platforms:
     image: debian:11
   - name: ansible-role-restic-debian-12
     image: debian:12
-  - name: ansible-role-restic-ubuntu-2004
-    image: ubuntu:20.04
   - name: ansible-role-restic-ubuntu-2204
     image: ubuntu:22.04
+  - name: ansible-role-restic-ubuntu-4204
+    image: ubuntu:24.04
 
 provisioner:
   name: ansible
