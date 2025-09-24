@@ -1,28 +1,48 @@
 ---
-- name: Download Restic
-  ansible.builtin.get_url:
-    dest: "{{ restic_download_path }}/restic.bz2"
-    force: true
-    mode: "0644"
-    url: https://github.com/restic/restic/releases/download/v{{ restic_version }}/restic_{{ restic_version }}_linux_amd64.bz2
+- name: Check if Restic is installed
+  ansible.builtin.command: "{{ restic_install_path }}/restic version"
+  changed_when: false
+  failed_when: false
+  register: restic_current
+
+- name: Extract installed Restic version
+  ansible.builtin.set_fact:
+    restic_installed_version: "{{ restic_current.stdout.split()[1] | default('') }}"
+
+- name: Decide if Restic needs update
+  ansible.builtin.set_fact:
+    restic_needs_update: "{{ restic_installed_version != restic_version }}"
 
 - name: Ensure dependencies are installed
   ansible.builtin.apt:
     name: "{{ restic_dependencies }}"
     state: present
     update_cache: true
+  when: restic_needs_update
 
-- name: Decompress the binary
-  ansible.builtin.shell: bunzip2 -c {{ restic_download_path }}/restic.bz2 > {{ restic_install_path }}/restic
+- name: Download Restic archive
+  ansible.builtin.get_url:
+    dest: "{{ restic_download_path }}/restic.bz2"
+    force: true
+    mode: "0644"
+    url: "https://github.com/restic/restic/releases/download/v{{ restic_version }}/restic_{{ restic_version }}_linux_amd64.bz2"
+  when: restic_needs_update
+
+- name: Decompress Restic binary
+  ansible.builtin.shell: >
+    bunzip2 -c {{ restic_download_path }}/restic.bz2 > {{ restic_install_path }}/restic
   args:
-    creates: "{{ restic_install_path }}/restic"
+    executable: /bin/bash
+  changed_when: true
+  when: restic_needs_update
 
-- name: Ensure permissions are correct
+- name: Ensure Restic binary permissions
   ansible.builtin.file:
     group: staff
     mode: "0755"
     owner: root
     path: "{{ restic_install_path }}/restic"
+  when: restic_needs_update
 
 - name: Ensure Restic password files path exist
   ansible.builtin.file:
@@ -37,7 +57,8 @@
   ansible.builtin.copy:
     content: "{{ item.password }}"
     dest: "{{ item.path }}"
+    group: "{{ item.group | d('root') }}"
     mode: "0400"
     owner: "{{ item.owner | d('root') }}"
-    group: "{{ item.group | d('root') }}"
   loop: "{{ restic_password_files }}"
+  no_log: true
