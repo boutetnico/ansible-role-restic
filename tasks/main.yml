@@ -25,7 +25,7 @@
     dest: "{{ restic_download_path }}/restic.bz2"
     force: true
     mode: "0644"
-    url: "https://github.com/restic/restic/releases/download/v{{ restic_version }}/restic_{{ restic_version }}_linux_amd64.bz2"
+    url: "https://github.com/restic/restic/releases/download/v{{ restic_version }}/restic_{{ restic_version }}_linux_{{ restic_arch_map[ansible_facts['architecture']] }}.bz2"
   when: restic_needs_update
 
 - name: Decompress Restic binary
